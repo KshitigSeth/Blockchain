@@ -2,17 +2,17 @@ import hashlib
 import time
 
 class Block:
-    def __init__(self, index, timestamp, data, previous_hash):
+    def __init__(self, index, timestamp, transactions, previous_hash):
         self.index = index                  # Block number in the chain
         self.timestamp = timestamp          # Time when the block was created
-        self.data = data                    # Transaction data or other content
+        self.transactions = transactions    # Transaction data or other content
         self.previous_hash = previous_hash  # Hash of the previous block
         self.nonce = 0                      # Initial nonce value
         self.hash = self.calculate_hash()   # Current block’s hash, generated on creation
 
     def calculate_hash(self):
         # Converts block contents into a single unique hash string
-        block_string = f"{self.index}{self.timestamp}{self.data}{self.previous_hash}{self.nonce}"
+        block_string = f"{self.index}{self.timestamp}{self.transactions}{self.previous_hash}{self.nonce}"
         return hashlib.sha256(block_string.encode()).hexdigest()
     
 
